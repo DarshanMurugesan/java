@@ -1,0 +1,32 @@
+class FileDownloader implements Runnable {
+    private String fileName;
+    public FileDownloader(String fileName) {
+        this.fileName = fileName;
+    }
+        public void run() {
+        System.out.println("Starting download for " + fileName);
+        for (int i = 1; i <= 5; i++) {
+                System.out.println("Downloading " + fileName + "... " + (i * 20) + "% complete");
+                Thread.sleep(500);  // Simulate time taken to download
+            }
+         System.out.println("Completed download for " + fileName);
+    }
+}
+
+public class FileDownloadSimulator {
+    public static void main(String[] args) {
+        // Create runnable download tasks
+        Runnable download1 = new FileDownloader("File1.pdf");
+        Runnable download2 = new FileDownloader("File2.mp3");
+        Runnable download3 = new FileDownloader("File3.zip");
+        // Create threads for each file
+        Thread thread1 = new Thread(download1);
+        Thread thread2 = new Thread(download2);
+        Thread thread3 = new Thread(download3);
+        // Start all threads
+        thread1.start();
+        thread2.start();
+        thread3.start();
+        System.out.println("All download tasks started.");
+    }
+}
